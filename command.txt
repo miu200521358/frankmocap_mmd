@@ -1,0 +1,83 @@
+conda create -n frankmocap python=3.7
+
+conda activate frankmocap
+
+python -m pip uninstall pip
+python -m ensurepip
+python -m pip install --upgrade pip
+
+conda install pywin32
+
+# conda install pytorch==1.5.0 torchvision==0.6.0 cudatoolkit=10.2 -c pytorch
+conda install pytorch==1.6.0 torchvision==0.7.0 cudatoolkit=10.2 -c pytorch
+# conda install pytorch==1.4.0 torchvision==0.5.0 cudatoolkit=9.2 -c pytorch
+# conda install pytorch==1.5.0 torchvision==0.6.0 cudatoolkit=9.2 -c pytorch
+# conda install pytorch==1.4.0 torchvision==0.5.0 cudatoolkit=9.2 -c pytorch
+# conda install pytorch==1.5.1 torchvision==0.6.1 cudatoolkit=10.2 -c pytorch
+
+pip install ffmpeg
+
+pip install -r docs/requirements.txt
+
+git clone https://github.com/facebookresearch/detectron2.git
+
+python -m pip install -e detectron2
+
+# cd detectron2
+
+# python setup.py build develop
+
+pip install opencv-python
+
+pip install pytorch3d
+
+pip install gdown
+
+Ubuntu
+devadmin@GARNET:/mnt/c/mmd/frankmocap_mmd$ sh scripts/install_frankmocap.sh
+
+
+(frankmocap) C:\MMD\frankmocap_mmd\detectors\hand_object_detector\lib>cd C:\MMD\frankmocap_mmd\detectors\hand_object_detector\lib
+
+(frankmocap) C:\MMD\frankmocap_mmd\detectors\hand_object_detector\lib>python setup.py build develop
+
+C:\MMD\frankmocap_mmd\detectors\hand_object_detector\lib\model\csrc\cuda\ROIAlign_cuda.cu
+C:/MMD/frankmocap_mmd/detectors/hand_object_detector/lib/model/csrc/cuda/ROIPool_cuda.cu
+ÇªÇÍÇºÇÍ3â”èäÇèCê≥
+https://www.programmersought.com/article/9048671945/
+
+pytorch3dÇWindowsÇ…ì¸ÇÍÇÈ
+git clone -b 1.11.0 https://github.com/NVIDIA/cub.git
+set CUB_HOME=C:\MMD\frankmocap_mmd\cub
+set FORCE_CUDA=1
+set PYTORCH3D_NO_NINJA=1
+
+git clone https://github.com/facebookresearch/pytorch3d.git
+cd pytorch3d
+python setup.py install
+
+python -m demo.demo_bodymocap --input_path ./sample_data/han_short.mp4 --out_dir ./mocap_output
+
+
+
+-----------------------------
+
+Ubuntu
+
+conda create -n frankmocap python=3.7
+
+conda activate frankmocap
+
+sudo apt-get install ffmpeg
+
+conda install pytorch==1.6.0 torchvision==0.7.0 cpuonly -c pytorch
+
+pip install -r docs/requirements.txt
+
+python -m pip install detectron2 -f https://dl.fbaipublicfiles.com/detectron2/wheels/cu101/torch1.6/index.html
+
+pip install pytorch3d
+
+sh scripts/install_frankmocap.sh
+
+python -m demo.demo_bodymocap --input_path ./sample_data/han_short.mp4 --out_dir ./mocap_output --renderer_type pytorch3d

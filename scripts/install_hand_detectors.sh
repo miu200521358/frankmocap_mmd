@@ -14,7 +14,7 @@ if [ ! -d hand_object_detector ]; then
 fi
 # compile
 cd hand_object_detector/lib
-python setup.py build develop
+# python setup.py build develop
 cd ../../
 
 # Install 100-DOH hand-only detectors

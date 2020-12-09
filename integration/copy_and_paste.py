@@ -167,6 +167,33 @@ def integration_copy_paste(pred_body_list, pred_hand_list, smplx_model, image_sh
             pred_vertices_bbox, bbox_scale_ratio, bbox_top_left, image_shape[1], image_shape[0])
         integral_output['pred_vertices_img'] = pred_vertices_img
 
+        # convert mesh to original image space (X,Y are aligned to image)
+        pred_joints_bbox = convert_smpl_to_bbox(
+            pred_joints_3d, camScale, camTrans)
+        pred_joints_img = convert_bbox_to_oriIm(
+            pred_joints_bbox, bbox_scale_ratio, bbox_top_left, image_shape[1], image_shape[0])
+        integral_output['pred_joints_img'] = pred_joints_img
+
+        pred_left_hand_joints = smplx_output.left_hand_joints
+        pred_left_hand_joints = pred_left_hand_joints[0].detach().cpu().numpy()   
+
+        # convert mesh to original image space (X,Y are aligned to image)
+        pred_left_hand_joints_bbox = convert_smpl_to_bbox(
+            pred_left_hand_joints, camScale, camTrans)
+        pred_left_hand_joints_img = convert_bbox_to_oriIm(
+            pred_left_hand_joints_bbox, bbox_scale_ratio, bbox_top_left, image_shape[1], image_shape[0])
+        integral_output['pred_left_hand_joints_img'] = pred_left_hand_joints_img
+
+        pred_right_hand_joints = smplx_output.right_hand_joints
+        pred_right_hand_joints = pred_right_hand_joints[0].detach().cpu().numpy()   
+
+        # convert mesh to original image space (X,Y are aligned to image)
+        pred_right_hand_joints_bbox = convert_smpl_to_bbox(
+            pred_right_hand_joints, camScale, camTrans)
+        pred_right_hand_joints_img = convert_bbox_to_oriIm(
+            pred_right_hand_joints_bbox, bbox_scale_ratio, bbox_top_left, image_shape[1], image_shape[0])
+        integral_output['pred_right_hand_joints_img'] = pred_right_hand_joints_img
+
         # keep hand info
         r_hand_local_orient_body = body_info['pred_rotmat'][:, 21] # rot-mat
         r_hand_global_orient_body = transfer_rotation(
